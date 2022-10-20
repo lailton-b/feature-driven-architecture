@@ -1,7 +1,6 @@
 ## Característica
 
 Às vezes, será difícil decidir o que é uma feature e o que não é.
-
 ### O problema é o núcleo
 
 No centro de qualquer feature, há um problema. Um problema é uma razão pela qual você tem uma feature em primeiro lugar. O primeiro passo para identificar o nome e o escopo da feature é definir qual problema ele deve resolver.
@@ -19,3 +18,5 @@ Generalizado, o login é uma forma de autenticação. O problema que ele resolve
 Portanto, poderíamos chamar a feature de "autenticação" e o botão de login, e o formulário de login são seus detalhes de implementação.
 
 Tendo a definição do feature como "autenticação", poderíamos adicionar autenticação usando um serviço OAuth. Ainda faria parte da feature de "autenticação" porque está resolvendo o mesmo problema.
+
+
