@@ -6,7 +6,7 @@ Estes são três tipos de limites que esta especificação define:
 
 - __Sistema de arquivos__ - como nomear arquivos e pastas
 - __Dependências__ - quais limites podem depender um do outro
-- __Escopo de conhecimento__ - qual limite tem que tipo de conhecimento
+- __Escopo de conhecimento__ - limite do Conhecimento
 
 ## Razão
 
@@ -27,23 +27,6 @@ Em vez de organizar o código por dados e tipos de abstração, queremos organiz
 **Refatoração** - entenda melhor o escopo de uma mudança. Ganhe muito mais confiança ao alterar um recurso sabendo que ele não afetará outros recursos. Veja quais recursos serão afetados ao alterar uma abstração compartilhada.
 
 **Experimentos** - permite criar e remover recursos experimentais.
-
-## Não-metas
-
-**Language and Framework** - é independente de linguagem e framework. Ele deixa muito espaço para acomodar necessidades específicas de produtos e decisões de design.
-
-**Modelo de fluxo de dados** - é independente do fluxo de dados. O modelo de dados unidirecional, reativo ou de ator não importa, desde que os princípios não sejam quebrados.
-
-**Busca de dados** - é independente da camada de rede.
-Websockets ou HTTP, REST, RPC ou GraphQL - não importa, desde que os princípios não sejam quebrados.
-
-## Como
-
-A Feature Driven Architecture define os limites fundamentais: Feature, Cluster, Screen, Shared e Library. Cada conceito segue os princípios fundamentais.
-
-Um conceito de "Feature" é a base da Feature Driven Architecture. Todo o resto existe para apoiá-lo.
-
-Quebrar qualquer princípio descrito nesta arquitetura levará a problemas específicos em sua base de código, e o objetivo aqui é definir os benefícios e as compensações.
 
 ## Princípios Fundamentais
 
@@ -103,24 +86,26 @@ Uma feature segue estes princípios:
 
 ## Estrutura
 
-
 ```sh
 └── src/
     ├── app/                    
     |                           
     ├── components/             
     |   ├── {some-component}/   
+    |   ├── layout/ 
+    |   |   ├── {some-component}/   
     |   ...                     
     |                           
     ├── config/                
-    |   ├── {some-config}/        
+    |   ├── {some-config}/  
+    |   |   ├── lib/         
     |   ...                     
     |                           
     ├── constants/              
     |   ├── {some-constant}/        
     |   ...                     
     |                           
-    ├── contexts/               
+    ├── store/               
     |   ├── {some-context}/        
     |   ...                     
     |                           
@@ -141,10 +126,7 @@ Uma feature segue estes princípios:
     |   ...                 
     |                       
     ├── pages/                 
-    |   ├── {some-page}/        
-    |   |   ├── lib/            
-    |   |   ├── model/          
-    |   |   └── ui/             
+    |   ├── {some-page}/                
     |   ...                 
     |                       
     ├── services/              
@@ -165,5 +147,52 @@ Uma feature segue estes princípios:
     |                       
     └── index.tsx/          
 ```
+## components/
+- Contém componentes reutilizáveis ​​que são usados ​​com mais frequência para compor uma Feature ou Página.
+- Esses componentes são quase sempre puros e de apresentação, sem [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251).
+## layouts/
+- Contém componentes de layout reutilizáveis. Um Componente de Layout é um componente que compõe o layout de uma página. Muitas vezes, ele importa componentes como sidebar,footer, sidebar.
+- Se for provável que seu projeto tenha apenas um único layout, esse diretório pode não ser necessário e o Layout Component pode residir no diretório de componentes.
+## config/
+- Todas as configurações do aplicativo devem ser mantidas neste caminho. 
+- Código de configuração do projeto, variáveis ​​globais, urls etc.
+## lib/
+- Esta pasta contém [fachadas](https://blog.webdevsimplified.com/2022-07/facade-pattern/) para as várias bibliotecas diferentes que você usa em seu projeto.
+- Por exemplo, se você usar o axios library, esta pasta conterá um arquivo para essa biblioteca axios que cria sua própria API sobre a API axios que você usa em seu aplicativo.
+- Isso significa que, em vez de importar axios diretamente em seu projeto, você importaria o arquivo desta pasta associado a axios.
+## constants/
+- Contém strings reutilizáveis ​​e imutáveis, como URLs ou padrões Regex.
+## store/
+- Redux Store.
+## feature/
+- Toda a lógica necessária para uma Feature é colocada em um único diretório. Uma Feature geralmente é composto de muitos outros componentes, locais ou compartilhados. 
+O mesmo vale para todos os recursos: utils, types, hooks e assim por diante.
+- Features geralmente incluem [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251).
+- Se estiver usando Redux e interagir com o Store, a Feature incluirá um arquivo slice que define o “slice” do Redux Store que o recurso representa.
+## hooks/
+- Contém React Hooks reutilizáveis.
+## pages/
+- Page componente de página. Cada componente de página está associado a uma rota.
+- Page componente compõem o conteúdo de uma página importando Componentes e Features.
+- Um Page componente raramente deve incluir [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251) e, em vez disso, deve delegar [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251) as Features.
+## services/
+- Esta pasta contém todo o seu código para interface com qualquer API externa.
+## styles/
+- Estilos reutilizáveis ​​ou globais. 
+- Pode incluir configurações, redefinições ou variáveis.
+## types/
+- Tipos reutilizáveis ​​para projetos que utilizam TypeScript.
+## utils/
+- Funções utilitárias reutilizáveis. Essas funções devem ser sempre puras e não produzir [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251).
 
+## Naming
 
+kebab-case para para nomes de arquivos dos aplicativos React.
+```sh
+// my-component
+// my-component.tsx
+
+return (
+    <MyComponent />
+)
+```
