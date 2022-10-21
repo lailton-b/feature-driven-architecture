@@ -207,3 +207,10 @@ return (
     <MyComponent />
 )
 ```
+
+TypeScript.
+```sh
+ComponentProps = {}
+MethodApiResponse = {}
+MethodApiParams =  {}
+```
