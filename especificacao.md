@@ -56,7 +56,7 @@ Em vez de organizar o código por dados e tipos de abstração, queremos organiz
 
 O escopo da feature geralmente depende do produto e das necessidades organizacionais, mas um feature específica deve ter um escopo claramente definido por seus mantenedores.
 
-[Leia mais sobre como identificar um recurso.](./feature.md)
+[Leia mais sobre como identificar uma Feature.](./feature.md)
 
 Uma feature segue estes princípios:
 
