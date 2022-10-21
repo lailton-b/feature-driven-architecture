@@ -89,7 +89,16 @@ Uma feature segue estes princípios:
 ```sh
 └── src/
     ├── app/                    
-    |                           
+    |
+    ├── assets/             
+    |   ├── brand/ 
+    |   |   ├── {some-image}/
+    |   ├── images/ 
+    |   |   ├── {some-image}/
+    |   ├── svg/ 
+    |   |   ├── {some-svg}/         
+    |   ... 
+    |                                 
     ├── components/             
     |   ├── {some-component}/   
     |   ├── layout/ 
@@ -147,6 +156,8 @@ Uma feature segue estes princípios:
     |                       
     └── index.tsx/          
 ```
+## assets/
+- A pasta assets contém todas as imagens, icones, arquivos de fonte, etc. para seu projeto. 
 ## components/
 - Contém componentes reutilizáveis ​​que são usados ​​com mais frequência para compor uma Feature ou Página.
 - Esses componentes são quase sempre puros e de apresentação, sem [side-effects](https://medium.com/@remoteupskill/what-is-a-react-side-effect-a5525129d251).
