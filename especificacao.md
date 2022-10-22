@@ -101,7 +101,7 @@ Uma feature segue estes princípios:
     |                                 
     ├── components/             
     |   ├── {some-component}/   
-    |   ├── layout/ 
+    |   ├── layouts/ 
     |   |   ├── {some-component}/   
     |   ...                     
     |                           
