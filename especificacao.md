@@ -209,8 +209,15 @@ return (
 ```
 
 TypeScript.
-```sh
+```ts
 ComponentProps = {}
 MethodApiResponse = {}
 MethodApiParams =  {}
+```
+
+Utilizar Interface sempre que possível, Types devem ser utilizados somente quanto obrigado pelo TypeScript,
+como na atribuição de valores.
+Ex:
+```ts
+type value = string | number;
 ```
